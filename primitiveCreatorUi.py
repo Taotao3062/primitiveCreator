@@ -1,11 +1,11 @@
 try:
-	from PySide6 import QtCore, QtGui, Qtwidgets
+	from PySide6 import QtCore, QtGui, QtWidgets
 	from shiboken6 import wrapInstance
 except:
-	from PySide2 import QtCore, QtGui, Qtwidgets
+	from PySide2 import QtCore, QtGui, QtWidgets
 	from shiboken2 import wrapInstance
 
-import maya.OpenMayaUI as Omui
+import maya.OpenMayaUI as omui
 import os
 
 ICON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'icons'))
@@ -42,10 +42,12 @@ class PrimitiveCreatorDialog(QtWidgets.QDialog):
 		self.create_button = QtWidgets.QPushButton('Create')
 		self.cancel_button = QtWidgets.QPushButton('Cancel')
 		self.button_layout.addStretch()
+
 		self.button_layout.addWidget(self.create_button)
 		self.button_layout.addWidget(self.cancel_button)
 
 		self.initIconWidgets()
+		#self.setWindowOpacity(0.5)
 
 	def initIconWidgets(self):
 		prims = ['cone', 'cube', 'sphere', 'torus']
@@ -62,6 +64,6 @@ def run():
 		ui.close()
 	except:
 		pass
-	ptr = wrapInstance(int(omui.MQtUtil.mainWindow()), Qtwidgets.QWidget)
+	ptr = wrapInstance(int(omui.MQtUtil.mainWindow()), QtWidgets.QWidget)
 	ui = PrimitiveCreatorDialog(parent=ptr)
 	ui.show()
